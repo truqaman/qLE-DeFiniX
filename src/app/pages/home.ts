@@ -77,29 +77,29 @@ import { Web3Service } from '../services/web3.service';
 
               <div class="flex gap-3">
                 <div class="flex-shrink-0">
-                  <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-pink-500/20">
-                    <svg class="h-6 w-6 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-orange-500/20">
+                    <svg class="h-6 w-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                   </div>
                 </div>
                 <div>
                   <p class="font-semibold text-white">Multi-Token Support</p>
-                  <p class="text-sm text-slate-400">USDC, ETH & more</p>
+                  <p class="text-sm text-slate-400">USDq, YLP, YL$, USDC, ETH</p>
                 </div>
               </div>
 
               <div class="flex gap-3">
                 <div class="flex-shrink-0">
-                  <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-green-500/20">
-                    <svg class="h-6 w-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-orange-500/20">
+                    <svg class="h-6 w-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m7 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                   </div>
                 </div>
                 <div>
-                  <p class="font-semibold text-white">Low Slippage</p>
-                  <p class="text-sm text-slate-400">Better conversion rates</p>
+                  <p class="font-semibold text-white">Quantum Optimized</p>
+                  <p class="text-sm text-slate-400">Best conversion rates</p>
                 </div>
               </div>
             </div>
