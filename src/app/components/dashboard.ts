@@ -12,8 +12,16 @@ import { ETH_DECIMALS, USDC_DECIMALS, USDQ_DECIMALS } from '../constants/contrac
       <div class="container mx-auto px-4 max-w-6xl">
         <!-- Header -->
         <div class="mb-12">
-          <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Virtual Wallet</h1>
-          <p class="text-lg text-slate-300">Manage your digital assets with our secure virtual wallet system</p>
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 via-orange-500 to-red-500 rounded-lg flex items-center justify-center">
+              <span class="text-white font-bold text-xl">qLE</span>
+            </div>
+            <div>
+              <h1 class="text-4xl md:text-5xl font-bold text-white">DeFiniX</h1>
+              <p class="text-sm text-orange-400">Quantum Virtual Liquidity Engine</p>
+            </div>
+          </div>
+          <p class="text-lg text-slate-300">Manage your digital assets across multiple chains with advanced virtual wallet features</p>
         </div>
 
         <!-- Connection Status -->
