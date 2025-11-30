@@ -12,7 +12,7 @@ on:
 
 env:
   PROJECT_ID: iron-cedar-476617-k2
-  IMAGE_NAME: qleDeFiniX
+  IMAGE_NAME: qledefinix
   REGISTRY: gcr.io
 
 jobs:
