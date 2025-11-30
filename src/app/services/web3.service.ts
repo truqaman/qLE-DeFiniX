@@ -33,7 +33,16 @@ export class Web3Service {
   supportedChains = signal<ChainId[]>([10, 8453, 137, 1]); // OP, Base, Polygon, Ethereum
 
   constructor() {
+    this.initializeReadProvider();
     this.checkWalletConnection();
+  }
+
+  private initializeReadProvider() {
+    const alchemyKey = environment.apiKeys.alchemy;
+    if (alchemyKey) {
+      const rpcUrl = `https://opt-mainnet.g.alchemy.com/v2/${alchemyKey}`;
+      this.readProvider = new JsonRpcProvider(rpcUrl);
+    }
   }
 
   private async checkWalletConnection() {
