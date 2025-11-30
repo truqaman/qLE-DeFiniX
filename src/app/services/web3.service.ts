@@ -2,6 +2,12 @@ import { Injectable, signal } from '@angular/core';
 import { BrowserProvider, Contract, ethers } from 'ethers';
 import { VIRTUAL_WALLET_CONTRACT_ADDRESS, VIRTUAL_WALLET_ABI, USDC_ADDRESS } from '../constants/contract';
 
+declare global {
+  interface Window {
+    ethereum?: any;
+  }
+}
+
 export interface UserBalance {
   usdcBalance: bigint;
   ethBalance: bigint;
@@ -86,7 +92,7 @@ export class Web3Service {
 
     try {
       this.isLoading.set(true);
-      const tx = await this.contract.createVirtualWallet();
+      const tx = await (this.contract as any)['createVirtualWallet']();
       const receipt = await tx.wait();
       return receipt?.hash || '';
     } catch (error) {
@@ -108,7 +114,7 @@ export class Web3Service {
     );
 
     try {
-      const [usdcBalance, ethBalance] = await readContract.getUserBalances(address);
+      const [usdcBalance, ethBalance] = await (readContract as any)['getUserBalances'](address);
       return { usdcBalance, ethBalance };
     } catch (error) {
       console.error('Error fetching balances:', error);
@@ -127,7 +133,7 @@ export class Web3Service {
 
     try {
       const [usdcOutput, minUsdcOutput, ethOutput, minEthOutput] = 
-        await readContract.getConversionQuote(usdqAmount);
+        await (readContract as any)['getConversionQuote'](usdqAmount);
       return { usdcOutput, minUsdcOutput, ethOutput, minEthOutput };
     } catch (error) {
       console.error('Error fetching conversion quote:', error);
@@ -140,7 +146,7 @@ export class Web3Service {
 
     try {
       this.isLoading.set(true);
-      const tx = await this.contract.convertToETH(receiver, usdqAmount, minOutput);
+      const tx = await (this.contract as any)['convertToETH'](receiver, usdqAmount, minOutput);
       const receipt = await tx.wait();
       return receipt?.hash || '';
     } catch (error) {
@@ -157,7 +163,7 @@ export class Web3Service {
 
     try {
       this.isLoading.set(true);
-      const tx = await this.contract.convertToUSDC(receiver, usdqAmount, minOutput);
+      const tx = await (this.contract as any)['convertToUSDC'](receiver, usdqAmount, minOutput);
       const receipt = await tx.wait();
       return receipt?.hash || '';
     } catch (error) {
@@ -179,7 +185,7 @@ export class Web3Service {
 
     try {
       this.isLoading.set(true);
-      const tx = await this.contract.depositToETH(token, amount, receiver, minOutput);
+      const tx = await (this.contract as any)['depositToETH'](token, amount, receiver, minOutput);
       const receipt = await tx.wait();
       return receipt?.hash || '';
     } catch (error) {
@@ -201,7 +207,7 @@ export class Web3Service {
 
     try {
       this.isLoading.set(true);
-      const tx = await this.contract.depositToUSDC(token, amount, receiver, minOutput);
+      const tx = await (this.contract as any)['depositToUSDC'](token, amount, receiver, minOutput);
       const receipt = await tx.wait();
       return receipt?.hash || '';
     } catch (error) {
@@ -218,7 +224,7 @@ export class Web3Service {
 
     try {
       this.isLoading.set(true);
-      const tx = await this.contract.withdrawETH(amount, minUsdqOutput);
+      const tx = await (this.contract as any)['withdrawETH'](amount, minUsdqOutput);
       const receipt = await tx.wait();
       return receipt?.hash || '';
     } catch (error) {
@@ -235,7 +241,7 @@ export class Web3Service {
 
     try {
       this.isLoading.set(true);
-      const tx = await this.contract.withdrawUSDC(amount, minUsdqOutput);
+      const tx = await (this.contract as any)['withdrawUSDC'](amount, minUsdqOutput);
       const receipt = await tx.wait();
       return receipt?.hash || '';
     } catch (error) {
@@ -257,7 +263,7 @@ export class Web3Service {
     );
 
     try {
-      return await readContract.walletExists(address);
+      return await (readContract as any)['walletExists'](address);
     } catch (error) {
       console.error('Error checking wallet:', error);
       return false;
@@ -274,7 +280,7 @@ export class Web3Service {
     );
 
     try {
-      return await readContract.getTotalWallets();
+      return await (readContract as any)['getTotalWallets']();
     } catch (error) {
       console.error('Error fetching total wallets:', error);
       return BigInt(0);
