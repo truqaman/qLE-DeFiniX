@@ -1,12 +1,31 @@
 {
-  "name": "fusion-angular-tailwind-starter",
-  "version": "0.0.0",
+  "name": "definix",
+  "version": "1.0.0",
+  "description": "World's first quantum Virtual Liquidity Engine qLE using virtual wallets and stablecoins",
+  "author": "DeFiniX",
+  "license": "MIT",
+  "keywords": [
+    "defi",
+    "quantum",
+    "liquidity",
+    "virtual-wallet",
+    "stablecoin",
+    "ethereum",
+    "optimism",
+    "base",
+    "polygon"
+  ],
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:prod": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "lint": "ng lint --if-present || true",
+    "docker:build": "docker build -t definix:latest .",
+    "docker:run": "docker run -p 8080:8080 -e ALCHEMY_API_KEY=$ALCHEMY_API_KEY -e DUNE_API_KEY=$DUNE_API_KEY definix:latest",
+    "deploy:gcp": "chmod +x scripts/deploy-gcp.sh && ./scripts/deploy-gcp.sh"
   },
   "prettier": {
     "overrides": [
@@ -26,7 +45,6 @@
     "@angular/forms": "^20.1.0",
     "@angular/platform-browser": "^20.1.0",
     "@angular/router": "^20.1.0",
-    "ethers": "^6.15.0",
     "postcss": "^8.5.6",
     "rxjs": "~7.8.0",
     "tailwindcss": "^3.4.11",
