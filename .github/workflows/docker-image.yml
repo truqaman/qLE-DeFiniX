@@ -11,7 +11,7 @@ on:
       - develop
 
 env:
-  PROJECT_ID: oceanic-grin-402108
+  PROJECT_ID: iron-cedar-476617-k2
   IMAGE_NAME: qleDeFiniX
   REGISTRY: gcr.io
 
