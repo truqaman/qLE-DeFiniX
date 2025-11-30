@@ -245,17 +245,17 @@ import { Web3Service } from '../services/web3.service';
       </section>
 
       <!-- Footer -->
-      <footer class="bg-slate-900 border-t border-slate-800 py-12">
+      <footer class="bg-slate-900 border-t border-orange-500/20 py-12">
         <div class="container mx-auto px-4 max-w-6xl">
           <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div>
               <div class="flex items-center gap-3 mb-4">
-                <div class="w-8 h-8 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-lg flex items-center justify-center">
-                  <span class="text-white font-bold text-sm">VW</span>
+                <div class="w-8 h-8 bg-gradient-to-br from-cyan-500 via-orange-500 to-red-500 rounded-lg flex items-center justify-center">
+                  <span class="text-white font-bold text-xs">qLE</span>
                 </div>
-                <span class="font-bold text-white">Virtual Wallet</span>
+                <span class="font-bold text-white">DeFiniX</span>
               </div>
-              <p class="text-slate-400 text-sm">The future of digital asset management.</p>
+              <p class="text-slate-400 text-sm">World's first quantum Virtual Liquidity Engine using virtual wallets and stablecoins.</p>
             </div>
             <div>
               <p class="font-semibold text-white mb-4">Product</p>
