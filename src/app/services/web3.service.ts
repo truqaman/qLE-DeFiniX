@@ -1,8 +1,16 @@
-import { Injectable, signal } from '@angular/core';
-import { BrowserProvider, Contract, ethers, JsonRpcProvider } from 'ethers';
-import { VIRTUAL_WALLET_CONTRACT_ADDRESS, VIRTUAL_WALLET_ABI } from '../constants/contract';
-import { CHAIN_CONFIG, USDC_ADDRESSES, ChainId, SUPPORTED_TOKENS } from '../constants/tokens';
-import { environment } from '../../environments/environment';
+import { Injectable, signal } from "@angular/core";
+import { BrowserProvider, Contract, ethers, JsonRpcProvider } from "ethers";
+import {
+  VIRTUAL_WALLET_CONTRACT_ADDRESS,
+  VIRTUAL_WALLET_ABI,
+} from "../constants/contract";
+import {
+  CHAIN_CONFIG,
+  USDC_ADDRESSES,
+  ChainId,
+  SUPPORTED_TOKENS,
+} from "../constants/tokens";
+import { environment } from "../../environments/environment";
 
 declare global {
   interface Window {
@@ -16,7 +24,7 @@ export interface UserBalance {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class Web3Service {
   private provider: BrowserProvider | null = null;
@@ -46,7 +54,7 @@ export class Web3Service {
   }
 
   private async checkWalletConnection() {
-    if (typeof window !== 'undefined' && window.ethereum) {
+    if (typeof window !== "undefined" && window.ethereum) {
       try {
         const provider = new BrowserProvider(window.ethereum);
         const accounts = await provider.listAccounts();
@@ -54,7 +62,7 @@ export class Web3Service {
           await this.connectWallet();
         }
       } catch (error) {
-        console.log('Wallet not connected');
+        console.log("Wallet not connected");
       }
     }
   }
@@ -65,11 +73,11 @@ export class Web3Service {
       this.errorMessage.set(null);
 
       if (!window.ethereum) {
-        throw new Error('MetaMask not installed');
+        throw new Error("MetaMask not installed");
       }
 
       this.provider = new BrowserProvider(window.ethereum);
-      await this.provider.send('eth_requestAccounts', []);
+      await this.provider.send("eth_requestAccounts", []);
 
       this.signer = await this.provider.getSigner();
       const address = await this.signer.getAddress();
@@ -77,7 +85,7 @@ export class Web3Service {
       this.contract = new Contract(
         VIRTUAL_WALLET_CONTRACT_ADDRESS,
         VIRTUAL_WALLET_ABI,
-        this.signer
+        this.signer,
       );
 
       this.connectedAccount.set(address);
@@ -85,7 +93,8 @@ export class Web3Service {
 
       return address;
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Failed to connect wallet';
+      const message =
+        error instanceof Error ? error.message : "Failed to connect wallet";
       this.errorMessage.set(message);
       throw error;
     } finally {
@@ -102,15 +111,16 @@ export class Web3Service {
   }
 
   async createVirtualWallet(): Promise<string> {
-    if (!this.contract) throw new Error('Not connected');
+    if (!this.contract) throw new Error("Not connected");
 
     try {
       this.isLoading.set(true);
-      const tx = await (this.contract as any)['createVirtualWallet']();
+      const tx = await (this.contract as any)["createVirtualWallet"]();
       const receipt = await tx.wait();
-      return receipt?.hash || '';
+      return receipt?.hash || "";
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Failed to create wallet';
+      const message =
+        error instanceof Error ? error.message : "Failed to create wallet";
       this.errorMessage.set(message);
       throw error;
     } finally {
@@ -119,52 +129,64 @@ export class Web3Service {
   }
 
   async getUserBalances(address: string): Promise<UserBalance> {
-    if (!this.provider) throw new Error('Not connected');
+    if (!this.provider) throw new Error("Not connected");
 
     const readContract = new Contract(
       VIRTUAL_WALLET_CONTRACT_ADDRESS,
       VIRTUAL_WALLET_ABI,
-      this.provider
+      this.provider,
     );
 
     try {
-      const [usdcBalance, ethBalance] = await (readContract as any)['getUserBalances'](address);
+      const [usdcBalance, ethBalance] = await (readContract as any)[
+        "getUserBalances"
+      ](address);
       return { usdcBalance, ethBalance };
     } catch (error) {
-      console.error('Error fetching balances:', error);
+      console.error("Error fetching balances:", error);
       return { usdcBalance: BigInt(0), ethBalance: BigInt(0) };
     }
   }
 
   async getConversionQuote(usdqAmount: bigint) {
-    if (!this.provider) throw new Error('Not connected');
+    if (!this.provider) throw new Error("Not connected");
 
     const readContract = new Contract(
       VIRTUAL_WALLET_CONTRACT_ADDRESS,
       VIRTUAL_WALLET_ABI,
-      this.provider
+      this.provider,
     );
 
     try {
-      const [usdcOutput, minUsdcOutput, ethOutput, minEthOutput] = 
-        await (readContract as any)['getConversionQuote'](usdqAmount);
+      const [usdcOutput, minUsdcOutput, ethOutput, minEthOutput] = await (
+        readContract as any
+      )["getConversionQuote"](usdqAmount);
       return { usdcOutput, minUsdcOutput, ethOutput, minEthOutput };
     } catch (error) {
-      console.error('Error fetching conversion quote:', error);
+      console.error("Error fetching conversion quote:", error);
       throw error;
     }
   }
 
-  async convertToETH(receiver: string, usdqAmount: bigint, minOutput: bigint): Promise<string> {
-    if (!this.contract) throw new Error('Not connected');
+  async convertToETH(
+    receiver: string,
+    usdqAmount: bigint,
+    minOutput: bigint,
+  ): Promise<string> {
+    if (!this.contract) throw new Error("Not connected");
 
     try {
       this.isLoading.set(true);
-      const tx = await (this.contract as any)['convertToETH'](receiver, usdqAmount, minOutput);
+      const tx = await (this.contract as any)["convertToETH"](
+        receiver,
+        usdqAmount,
+        minOutput,
+      );
       const receipt = await tx.wait();
-      return receipt?.hash || '';
+      return receipt?.hash || "";
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Conversion failed';
+      const message =
+        error instanceof Error ? error.message : "Conversion failed";
       this.errorMessage.set(message);
       throw error;
     } finally {
@@ -172,16 +194,25 @@ export class Web3Service {
     }
   }
 
-  async convertToUSDC(receiver: string, usdqAmount: bigint, minOutput: bigint): Promise<string> {
-    if (!this.contract) throw new Error('Not connected');
+  async convertToUSDC(
+    receiver: string,
+    usdqAmount: bigint,
+    minOutput: bigint,
+  ): Promise<string> {
+    if (!this.contract) throw new Error("Not connected");
 
     try {
       this.isLoading.set(true);
-      const tx = await (this.contract as any)['convertToUSDC'](receiver, usdqAmount, minOutput);
+      const tx = await (this.contract as any)["convertToUSDC"](
+        receiver,
+        usdqAmount,
+        minOutput,
+      );
       const receipt = await tx.wait();
-      return receipt?.hash || '';
+      return receipt?.hash || "";
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Conversion failed';
+      const message =
+        error instanceof Error ? error.message : "Conversion failed";
       this.errorMessage.set(message);
       throw error;
     } finally {
@@ -193,17 +224,22 @@ export class Web3Service {
     token: string,
     amount: bigint,
     receiver: string,
-    minOutput: bigint
+    minOutput: bigint,
   ): Promise<string> {
-    if (!this.contract) throw new Error('Not connected');
+    if (!this.contract) throw new Error("Not connected");
 
     try {
       this.isLoading.set(true);
-      const tx = await (this.contract as any)['depositToETH'](token, amount, receiver, minOutput);
+      const tx = await (this.contract as any)["depositToETH"](
+        token,
+        amount,
+        receiver,
+        minOutput,
+      );
       const receipt = await tx.wait();
-      return receipt?.hash || '';
+      return receipt?.hash || "";
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Deposit failed';
+      const message = error instanceof Error ? error.message : "Deposit failed";
       this.errorMessage.set(message);
       throw error;
     } finally {
@@ -215,17 +251,22 @@ export class Web3Service {
     token: string,
     amount: bigint,
     receiver: string,
-    minOutput: bigint
+    minOutput: bigint,
   ): Promise<string> {
-    if (!this.contract) throw new Error('Not connected');
+    if (!this.contract) throw new Error("Not connected");
 
     try {
       this.isLoading.set(true);
-      const tx = await (this.contract as any)['depositToUSDC'](token, amount, receiver, minOutput);
+      const tx = await (this.contract as any)["depositToUSDC"](
+        token,
+        amount,
+        receiver,
+        minOutput,
+      );
       const receipt = await tx.wait();
-      return receipt?.hash || '';
+      return receipt?.hash || "";
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Deposit failed';
+      const message = error instanceof Error ? error.message : "Deposit failed";
       this.errorMessage.set(message);
       throw error;
     } finally {
@@ -234,15 +275,19 @@ export class Web3Service {
   }
 
   async withdrawETH(amount: bigint, minUsdqOutput: bigint): Promise<string> {
-    if (!this.contract) throw new Error('Not connected');
+    if (!this.contract) throw new Error("Not connected");
 
     try {
       this.isLoading.set(true);
-      const tx = await (this.contract as any)['withdrawETH'](amount, minUsdqOutput);
+      const tx = await (this.contract as any)["withdrawETH"](
+        amount,
+        minUsdqOutput,
+      );
       const receipt = await tx.wait();
-      return receipt?.hash || '';
+      return receipt?.hash || "";
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Withdrawal failed';
+      const message =
+        error instanceof Error ? error.message : "Withdrawal failed";
       this.errorMessage.set(message);
       throw error;
     } finally {
@@ -251,15 +296,19 @@ export class Web3Service {
   }
 
   async withdrawUSDC(amount: bigint, minUsdqOutput: bigint): Promise<string> {
-    if (!this.contract) throw new Error('Not connected');
+    if (!this.contract) throw new Error("Not connected");
 
     try {
       this.isLoading.set(true);
-      const tx = await (this.contract as any)['withdrawUSDC'](amount, minUsdqOutput);
+      const tx = await (this.contract as any)["withdrawUSDC"](
+        amount,
+        minUsdqOutput,
+      );
       const receipt = await tx.wait();
-      return receipt?.hash || '';
+      return receipt?.hash || "";
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Withdrawal failed';
+      const message =
+        error instanceof Error ? error.message : "Withdrawal failed";
       this.errorMessage.set(message);
       throw error;
     } finally {
@@ -268,35 +317,35 @@ export class Web3Service {
   }
 
   async walletExists(address: string): Promise<boolean> {
-    if (!this.provider) throw new Error('Not connected');
+    if (!this.provider) throw new Error("Not connected");
 
     const readContract = new Contract(
       VIRTUAL_WALLET_CONTRACT_ADDRESS,
       VIRTUAL_WALLET_ABI,
-      this.provider
+      this.provider,
     );
 
     try {
-      return await (readContract as any)['walletExists'](address);
+      return await (readContract as any)["walletExists"](address);
     } catch (error) {
-      console.error('Error checking wallet:', error);
+      console.error("Error checking wallet:", error);
       return false;
     }
   }
 
   async getTotalWallets(): Promise<bigint> {
-    if (!this.provider) throw new Error('Not connected');
+    if (!this.provider) throw new Error("Not connected");
 
     const readContract = new Contract(
       VIRTUAL_WALLET_CONTRACT_ADDRESS,
       VIRTUAL_WALLET_ABI,
-      this.provider
+      this.provider,
     );
 
     try {
-      return await (readContract as any)['getTotalWallets']();
+      return await (readContract as any)["getTotalWallets"]();
     } catch (error) {
-      console.error('Error fetching total wallets:', error);
+      console.error("Error fetching total wallets:", error);
       return BigInt(0);
     }
   }
@@ -306,13 +355,16 @@ export class Web3Service {
     const whole = balance / divisor;
     const remainder = balance % divisor;
 
-    const remainderStr = remainder.toString().padStart(decimals, '0').replace(/0+$/, '');
+    const remainderStr = remainder
+      .toString()
+      .padStart(decimals, "0")
+      .replace(/0+$/, "");
     return remainderStr ? `${whole}.${remainderStr}` : whole.toString();
   }
 
   parseBalance(amount: string, decimals: number = 18): bigint {
-    const [whole, frac = '0'] = amount.split('.');
-    const fracPadded = frac.padEnd(decimals, '0');
+    const [whole, frac = "0"] = amount.split(".");
+    const fracPadded = frac.padEnd(decimals, "0");
     return BigInt(whole + fracPadded);
   }
 
@@ -322,16 +374,16 @@ export class Web3Service {
 
   async switchChain(chainId: ChainId): Promise<void> {
     if (!window.ethereum) {
-      throw new Error('MetaMask not installed');
+      throw new Error("MetaMask not installed");
     }
 
     try {
       this.isLoading.set(true);
-      const hexChainId = '0x' + chainId.toString(16);
+      const hexChainId = "0x" + chainId.toString(16);
 
       await window.ethereum.request({
-        method: 'wallet_switchEthereumChain',
-        params: [{ chainId: hexChainId }]
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: hexChainId }],
       });
 
       this.currentChainId.set(chainId);
@@ -349,7 +401,7 @@ export class Web3Service {
 
   private async addChain(chainId: ChainId): Promise<void> {
     if (!window.ethereum) {
-      throw new Error('MetaMask not installed');
+      throw new Error("MetaMask not installed");
     }
 
     const chain = CHAIN_CONFIG[chainId];
@@ -357,21 +409,21 @@ export class Web3Service {
     const rpcUrl = `${chain.rpcUrl}${alchemyKey}`;
 
     const chainParams = {
-      chainId: '0x' + chainId.toString(16),
+      chainId: "0x" + chainId.toString(16),
       chainName: chain.name,
       rpcUrls: [rpcUrl],
       blockExplorerUrls: [chain.explorer],
       nativeCurrency: {
-        name: chainId === 137 ? 'MATIC' : 'ETH',
-        symbol: chainId === 137 ? 'MATIC' : 'ETH',
-        decimals: 18
-      }
+        name: chainId === 137 ? "MATIC" : "ETH",
+        symbol: chainId === 137 ? "MATIC" : "ETH",
+        decimals: 18,
+      },
     };
 
     try {
       await window.ethereum.request({
-        method: 'wallet_addEthereumChain',
-        params: [chainParams]
+        method: "wallet_addEthereumChain",
+        params: [chainParams],
       });
 
       this.currentChainId.set(chainId);
@@ -381,14 +433,14 @@ export class Web3Service {
   }
 
   getChainName(chainId: ChainId): string {
-    return CHAIN_CONFIG[chainId]?.name || 'Unknown Chain';
+    return CHAIN_CONFIG[chainId]?.name || "Unknown Chain";
   }
 
   getSupportedTokens(chainId: ChainId) {
-    return SUPPORTED_TOKENS.filter(token => token.chain === chainId);
+    return SUPPORTED_TOKENS.filter((token) => token.chain === chainId);
   }
 
   getUsdcAddress(chainId: ChainId): string {
-    return USDC_ADDRESSES[chainId] || '';
+    return USDC_ADDRESSES[chainId] || "";
   }
 }

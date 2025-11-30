@@ -21,19 +21,23 @@
 ## 📋 Supported Tokens
 
 ### Optimism (OP Mainnet - Chain 10)
+
 - **USDq**: `0x4b2842f382bfc19f409b1874c0480db3b36199b3` (6 decimals)
 - **YLP**: `0x25789bbc835a77bc4afa862f638f09b8b8fae201` (18 decimals)
 - **YL$**: `0xc618101ad5f3a5d924219f225148f8ac1ad74dba` (18 decimals)
 
 ### Base Mainnet (Chain 8453)
+
 - **USDq**: `0xbaf56ca7996e8398300d47f055f363882126f369` (6 decimals)
 - **YLP**: `0xa2f42a3db5ff5d8ff45baff00dea8b67c36c6d1c` (18 decimals)
 
 ### Polygon Mainnet (Chain 137)
+
 - **YLP**: `0x7332b6e5b80c9dd0cd165132434ffabdbd950612` (18 decimals)
 - **YL$**: `0x80df049656a6efa89327bbc2d159aa393c30e037` (18 decimals)
 
 ### Ethereum (Chain 1)
+
 - **USDC**: `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48` (6 decimals)
 
 ## 🛠 Tech Stack
@@ -154,12 +158,14 @@ gcloud run deploy vaultx \
 #### GitHub Actions CI/CD
 
 The project includes automated GitHub Actions workflows that:
+
 - Run tests on every push
 - Build Docker images
 - Push to Google Container Registry
 - Deploy to Cloud Run on main branch
 
 Configure GitHub secrets:
+
 - `ALCHEMY_API_KEY`
 - `DUNE_API_KEY`
 
@@ -188,7 +194,7 @@ await web3Service.switchChain(10); // Optimism
 Tokens and chain configurations are centralized in `src/app/constants/tokens.ts`:
 
 ```typescript
-import { SUPPORTED_TOKENS, getTokensByChain } from './constants/tokens';
+import { SUPPORTED_TOKENS, getTokensByChain } from "./constants/tokens";
 
 // Get tokens for a specific chain
 const opTokens = getTokensByChain(10);
@@ -277,16 +283,19 @@ Customize in `tailwind.config.js` and `src/styles.css`.
 ## 🐛 Troubleshooting
 
 ### MetaMask Connection Issues
+
 1. Ensure MetaMask is installed
 2. Switch to Optimism mainnet manually
 3. Check if wallet is connected in MetaMask
 
 ### Contract Interaction Failures
+
 1. Verify network matches token deployment
 2. Check contract address and ABI
 3. Ensure sufficient gas and balance
 
 ### Deployment Issues
+
 See [DEPLOYMENT.md](DEPLOYMENT.md) troubleshooting section.
 
 ## 📝 Environment Variables
@@ -316,6 +325,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## 📞 Support
 
 For issues and questions:
+
 - GitHub Issues: [Create an issue]
 - Documentation: See [DEPLOYMENT.md](DEPLOYMENT.md)
 - GCP Console: https://console.cloud.google.com/run

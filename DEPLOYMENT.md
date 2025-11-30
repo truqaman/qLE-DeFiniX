@@ -16,6 +16,7 @@ DeFiniX is a production-ready Angular application that deploys to Google Cloud R
 ## Prerequisites
 
 1. **Google Cloud Project**
+
    ```bash
    PROJECT_ID=oceanic-grin-402108
    ```
@@ -49,25 +50,28 @@ Environment variables are set via Cloud Run's `--set-env-vars` flag. See deploym
 
 DeFiniX supports the following EVM chains:
 
-| Chain | Chain ID | RPC Provider | Tokens Supported |
-|-------|----------|--------------|------------------|
-| Ethereum | 1 | Alchemy | USDC |
-| Optimism | 10 | Alchemy | USDq, YLP, YL$ |
-| Base | 8453 | Alchemy | USDq, YLP |
-| Polygon | 137 | Alchemy | YLP, YL$ |
+| Chain    | Chain ID | RPC Provider | Tokens Supported |
+| -------- | -------- | ------------ | ---------------- |
+| Ethereum | 1        | Alchemy      | USDC             |
+| Optimism | 10       | Alchemy      | USDq, YLP, YL$   |
+| Base     | 8453     | Alchemy      | USDq, YLP        |
+| Polygon  | 137      | Alchemy      | YLP, YL$         |
 
 ## Supported Tokens
 
 ### Optimism (OP Mainnet)
+
 - **USDq**: `0x4b2842f382bfc19f409b1874c0480db3b36199b3` (6 decimals)
 - **YLP**: `0x25789bbc835a77bc4afa862f638f09b8b8fae201` (18 decimals)
 - **YL$**: `0xc618101ad5f3a5d924219f225148f8ac1ad74dba` (18 decimals)
 
 ### Base Mainnet
+
 - **USDq**: `0xbaf56ca7996e8398300d47f055f363882126f369` (6 decimals)
 - **YLP**: `0xa2f42a3db5ff5d8ff45baff00dea8b67c36c6d1c` (18 decimals)
 
 ### Polygon Mainnet
+
 - **YLP**: `0x7332b6e5b80c9dd0cd165132434ffabdbd950612` (18 decimals)
 - **YL$**: `0x80df049656a6efa89327bbc2d159aa393c30e037` (18 decimals)
 
@@ -106,12 +110,14 @@ docker run -p 8080:8080 \
 ### Method 1: Automated GitHub Actions (Recommended)
 
 The CI/CD pipeline automatically:
+
 1. Runs tests on every push/PR
 2. Builds Docker image on push to main/develop
 3. Pushes to GCR
 4. Deploys to Cloud Run on main branch push
 
 **Setup**:
+
 1. Configure GitHub Secrets:
    - `ALCHEMY_API_KEY`
    - `DUNE_API_KEY`
@@ -180,6 +186,7 @@ gcloud run logs read vaultx \
 ### Monitor Performance
 
 Cloud Run provides built-in monitoring:
+
 - Cloud Console: https://console.cloud.google.com/run
 - Metrics: CPU, Memory, Request count, Latency
 - Logs: Stackdriver Logging
@@ -214,6 +221,7 @@ Cloud Run provides built-in monitoring:
 ### Port Not Accessible
 
 Check if port 8080 is correctly exposed:
+
 ```bash
 docker run -p 8080:8080 gcr.io/oceanic-grin-402108/vaultx:latest
 ```
@@ -221,6 +229,7 @@ docker run -p 8080:8080 gcr.io/oceanic-grin-402108/vaultx:latest
 ### Container Startup Issues
 
 View detailed logs:
+
 ```bash
 gcloud run logs read vaultx --limit 50 --platform managed
 ```
@@ -228,6 +237,7 @@ gcloud run logs read vaultx --limit 50 --platform managed
 ### Out of Memory
 
 Increase Cloud Run memory:
+
 ```bash
 gcloud run deploy vaultx \
   --image gcr.io/oceanic-grin-402108/vaultx:latest \
@@ -324,6 +334,7 @@ git push origin main
 ## Contact & Support
 
 For deployment issues or questions, refer to:
+
 - GCP Documentation: https://cloud.google.com/run/docs
 - Angular Documentation: https://angular.io/docs
 - DeFiniX Documentation: Check README.md
