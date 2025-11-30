@@ -40,7 +40,7 @@ import { ETH_DECIMALS, USDC_DECIMALS, USDQ_DECIMALS } from '../constants/contrac
               [disabled]="web3Service.isLoading()"
               class="px-6 py-3 rounded-lg font-semibold transition-all duration-200"
               [ngClass]="{
-                'bg-red-600 hover:bg-red-700 text-white': web3Service.isConnected(),
+                'bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white': web3Service.isConnected(),
                 'bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white': !web3Service.isConnected(),
                 'opacity-50 cursor-not-allowed': web3Service.isLoading()
               }"
