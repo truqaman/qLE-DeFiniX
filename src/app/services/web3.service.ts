@@ -22,12 +22,15 @@ export class Web3Service {
   private provider: BrowserProvider | null = null;
   private signer: ethers.Signer | null = null;
   private contract: Contract | null = null;
+  private readProvider: JsonRpcProvider | null = null;
 
   // State signals
   connectedAccount = signal<string | null>(null);
   isConnected = signal(false);
   isLoading = signal(false);
   errorMessage = signal<string | null>(null);
+  currentChainId = signal<ChainId | null>(null);
+  supportedChains = signal<ChainId[]>([10, 8453, 137, 1]); // OP, Base, Polygon, Ethereum
 
   constructor() {
     this.checkWalletConnection();
