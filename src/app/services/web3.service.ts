@@ -319,4 +319,76 @@ export class Web3Service {
   getShortAddress(address: string): string {
     return `${address.slice(0, 6)}...${address.slice(-4)}`;
   }
+
+  async switchChain(chainId: ChainId): Promise<void> {
+    if (!window.ethereum) {
+      throw new Error('MetaMask not installed');
+    }
+
+    try {
+      this.isLoading.set(true);
+      const hexChainId = '0x' + chainId.toString(16);
+
+      await window.ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: hexChainId }]
+      });
+
+      this.currentChainId.set(chainId);
+    } catch (error: any) {
+      // Chain not added to wallet, add it
+      if (error.code === 4902) {
+        await this.addChain(chainId);
+      } else {
+        throw error;
+      }
+    } finally {
+      this.isLoading.set(false);
+    }
+  }
+
+  private async addChain(chainId: ChainId): Promise<void> {
+    if (!window.ethereum) {
+      throw new Error('MetaMask not installed');
+    }
+
+    const chain = CHAIN_CONFIG[chainId];
+    const alchemyKey = environment.apiKeys.alchemy;
+    const rpcUrl = `${chain.rpcUrl}${alchemyKey}`;
+
+    const chainParams = {
+      chainId: '0x' + chainId.toString(16),
+      chainName: chain.name,
+      rpcUrls: [rpcUrl],
+      blockExplorerUrls: [chain.explorer],
+      nativeCurrency: {
+        name: chainId === 137 ? 'MATIC' : 'ETH',
+        symbol: chainId === 137 ? 'MATIC' : 'ETH',
+        decimals: 18
+      }
+    };
+
+    try {
+      await window.ethereum.request({
+        method: 'wallet_addEthereumChain',
+        params: [chainParams]
+      });
+
+      this.currentChainId.set(chainId);
+    } catch (error) {
+      throw new Error(`Failed to add chain: ${error}`);
+    }
+  }
+
+  getChainName(chainId: ChainId): string {
+    return CHAIN_CONFIG[chainId]?.name || 'Unknown Chain';
+  }
+
+  getSupportedTokens(chainId: ChainId) {
+    return SUPPORTED_TOKENS.filter(token => token.chain === chainId);
+  }
+
+  getUsdcAddress(chainId: ChainId): string {
+    return USDC_ADDRESSES[chainId] || '';
+  }
 }
