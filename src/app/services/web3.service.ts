@@ -1,6 +1,8 @@
 import { Injectable, signal } from '@angular/core';
-import { BrowserProvider, Contract, ethers } from 'ethers';
-import { VIRTUAL_WALLET_CONTRACT_ADDRESS, VIRTUAL_WALLET_ABI, USDC_ADDRESS } from '../constants/contract';
+import { BrowserProvider, Contract, ethers, JsonRpcProvider } from 'ethers';
+import { VIRTUAL_WALLET_CONTRACT_ADDRESS, VIRTUAL_WALLET_ABI } from '../constants/contract';
+import { CHAIN_CONFIG, USDC_ADDRESSES, ChainId, SUPPORTED_TOKENS } from '../constants/tokens';
+import { environment } from '../../environments/environment';
 
 declare global {
   interface Window {
