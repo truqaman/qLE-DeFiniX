@@ -230,10 +230,10 @@ import { Web3Service } from '../services/web3.service';
       </section>
 
       <!-- CTA Section -->
-      <section class="py-20 bg-gradient-to-r from-cyan-600 to-blue-600">
+      <section class="py-20 bg-gradient-to-r from-cyan-600 via-orange-500 to-red-600">
         <div class="container mx-auto px-4 max-w-4xl text-center">
-          <h2 class="text-4xl font-bold text-white mb-4">Ready to Get Started?</h2>
-          <p class="text-lg text-blue-100 mb-8">Join thousands of users managing their digital assets securely and efficiently.</p>
+          <h2 class="text-4xl font-bold text-white mb-4">Ready to Experience qLE?</h2>
+          <p class="text-lg text-white mb-8">Join the quantum liquidity revolution with DeFiniX. Manage your virtual wallet across multiple chains securely and efficiently.</p>
           <button
             (click)="connectAndNavigate()"
             [disabled]="web3Service.isLoading()"
