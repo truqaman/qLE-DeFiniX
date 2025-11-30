@@ -9,13 +9,13 @@ import { Web3Service } from '../services/web3.service';
   template: `
     <div class="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       <!-- Navigation Bar -->
-      <nav class="sticky top-0 z-50 bg-slate-900/80 backdrop-blur-lg border-b border-slate-800">
+      <nav class="sticky top-0 z-50 bg-slate-900/80 backdrop-blur-lg border-b border-orange-500/20">
         <div class="container mx-auto px-4 py-4 max-w-6xl flex items-center justify-between">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-lg flex items-center justify-center">
-              <span class="text-white font-bold text-lg">VW</span>
+            <div class="w-10 h-10 bg-gradient-to-br from-cyan-500 via-orange-500 to-red-500 rounded-lg flex items-center justify-center">
+              <span class="text-white font-bold text-lg">qLE</span>
             </div>
-            <span class="text-xl font-bold text-white">Virtual Wallet</span>
+            <span class="text-xl font-bold text-white">DeFiniX</span>
           </div>
           <button
             (click)="navigateToDashboard()"
