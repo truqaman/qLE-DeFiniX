@@ -32,12 +32,16 @@ import { Web3Service } from '../services/web3.service';
           <!-- Left Content -->
           <div class="space-y-8">
             <div class="space-y-4">
+              <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/50 mb-4">
+                <span class="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></span>
+                <span class="text-orange-400 font-semibold text-sm">Quantum Liquidity Engine</span>
+              </div>
               <h1 class="text-5xl lg:text-6xl font-bold text-white leading-tight">
-                The Future of
-                <span class="bg-gradient-to-r from-cyan-400 to-blue-400 text-transparent bg-clip-text"> Digital Wallets</span>
+                Welcome to
+                <span class="bg-gradient-to-r from-cyan-400 via-orange-400 to-red-400 text-transparent bg-clip-text"> DeFiniX</span>
               </h1>
               <p class="text-xl text-slate-300 leading-relaxed">
-                Experience seamless asset management with our advanced Virtual Wallet SDK. Deposit, withdraw, and convert between multiple tokens with industry-leading security and minimal slippage.
+                World's first quantum Virtual Liquidity Engine (qLE) using virtual wallets and stablecoins. Experience seamless asset management with multi-chain support, instant conversions, and enterprise-grade security.
               </p>
             </div>
 
