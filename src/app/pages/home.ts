@@ -282,8 +282,8 @@ import { Web3Service } from '../services/web3.service';
               </ul>
             </div>
           </div>
-          <div class="border-t border-slate-800 pt-8">
-            <p class="text-center text-slate-400 text-sm">© 2024 Virtual Wallet SDK. All rights reserved.</p>
+          <div class="border-t border-orange-500/20 pt-8">
+            <p class="text-center text-slate-400 text-sm">© 2024 DeFiniX. All rights reserved.</p>
           </div>
         </div>
       </footer>
