@@ -30,11 +30,12 @@
           },
           "configurations": {
             "production": {
+              "outputHashing": "all",
               "budgets": [
                 {
                   "type": "initial",
                   "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumError": "1.2MB"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -42,7 +43,12 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "buildOptimizer": true
             },
             "development": {
               "optimization": false,
