@@ -12,7 +12,7 @@ on:
 
 env:
   PROJECT_ID: oceanic-grin-402108
-  IMAGE_NAME: vaultx
+  IMAGE_NAME: qleDeFiniX
   REGISTRY: gcr.io
 
 jobs:
