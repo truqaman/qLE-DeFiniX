@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { Injectable } from "@angular/core";
+import { environment } from "../../environments/environment";
 
 export interface Config {
   alchemyKey: string;
@@ -8,7 +8,7 @@ export interface Config {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class ConfigService {
   private config: Config;
@@ -18,8 +18,10 @@ export class ConfigService {
   }
 
   private loadConfig(): Config {
-    const alchemyKey = this.getEnvVariable('ALCHEMY_API_KEY') || environment.apiKeys.alchemy;
-    const duneKey = this.getEnvVariable('DUNE_API_KEY') || environment.apiKeys.dune;
+    const alchemyKey =
+      this.getEnvVariable("ALCHEMY_API_KEY") || environment.apiKeys.alchemy;
+    const duneKey =
+      this.getEnvVariable("DUNE_API_KEY") || environment.apiKeys.dune;
 
     return {
       alchemyKey,
@@ -30,13 +32,13 @@ export class ConfigService {
 
   private getEnvVariable(name: string): string | null {
     // Try to get from window object (can be set by index.html or build process)
-    const win = typeof window !== 'undefined' ? (window as any) : {};
+    const win = typeof window !== "undefined" ? (window as any) : {};
     if (win._env_ && win._env_[name]) {
       return win._env_[name];
     }
 
     // For development, try to get from localStorage
-    if (!environment.production && typeof localStorage !== 'undefined') {
+    if (!environment.production && typeof localStorage !== "undefined") {
       const stored = localStorage.getItem(`__env_${name}`);
       if (stored) return stored;
     }
