@@ -18,7 +18,7 @@ DeFiniX is a production-ready Angular application that deploys to Google Cloud R
 1. **Google Cloud Project**
 
    ```bash
-   PROJECT_ID=oceanic-grin-402108
+   PROJECT_ID=your-gcloud-project-id
    ```
 
 2. **Required tools**
@@ -38,8 +38,8 @@ DeFiniX is a production-ready Angular application that deploys to Google Cloud R
 Create a `.env` file in the project root:
 
 ```env
-ALCHEMY_API_KEY=ovF7P49HQUPcSHcMQjg9-
-DUNE_API_KEY=sim_ENa3Ba3ZTFAuA9LWa0jtmJhd8fMgDaJY
+ALCHEMY_API_KEY=your_alchemy_API_key
+DUNE_API_KEY=your_dune_API_key
 ```
 
 ### Production Deployment
