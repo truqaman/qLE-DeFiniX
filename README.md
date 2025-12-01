@@ -1,6 +1,6 @@
 # DeFiniX - Quantum Virtual Liquidity Engine
 
-> World's first quantum Virtual Liquidity Engine (qLE) using virtual wallets and stablecoins
+> Cunovet Space Inc, HAADS PARTNERSHIPS and KOTNS Creative Space innovative World's first quantum Virtual Liquidity Engine (qLE) using virtual wallets and stablecoins
 
 ![DeFiniX](https://img.shields.io/badge/DeFiniX-qLE-orange?style=flat-square)
 ![Angular](https://img.shields.io/badge/Angular-20-red?style=flat-square)
@@ -339,4 +339,4 @@ For issues and questions:
 
 ---
 
-**DeFiniX** - The Future of Quantum Virtual Liquidity 🚀
+**DeFiniX** - The Future of Quantum Virtual Liquidity 🚀 Made With ❤️❤️❤️❤️❤️❤️❤️❤️ By THE HAADS PARTNERSHIPS OF CREATIVE AFRICAN MINDS FOR THE WEB3 VIRTUAL INFRASTRUCTURE 
