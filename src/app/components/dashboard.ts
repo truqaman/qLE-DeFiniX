@@ -296,6 +296,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   walletExists = signal(false);
   totalWallets = signal(0n);
   activeTab = signal<"deposit" | "withdraw" | "convert">("deposit");
+  showDepositModal = signal(false);
+  showWithdrawModal = signal(false);
+  showConvertModal = signal(false);
 
   ETH_DECIMALS = ETH_DECIMALS;
   USDC_DECIMALS = USDC_DECIMALS;
