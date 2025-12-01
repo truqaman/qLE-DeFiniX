@@ -31,7 +31,7 @@ import { SUPPORTED_TOKENS } from '../constants/tokens';
           <!-- Token Selection -->
           <div>
             <label class="block text-sm font-medium text-slate-300 mb-2">
-              Token to {{ mode() === 'deposit' ? 'Deposit' : 'Withdraw' }}
+              Token to {{ mode === 'deposit' ? 'Deposit' : 'Withdraw' }}
             </label>
             <select
               [(ngModel)]="selectedToken"
@@ -66,7 +66,7 @@ import { SUPPORTED_TOKENS } from '../constants/tokens';
           </div>
 
           <!-- Min Output (for deposits) -->
-          <div *ngIf="mode() === 'deposit'">
+          <div *ngIf="mode === 'deposit'">
             <label class="block text-sm font-medium text-slate-300 mb-2">
               Minimum Output (with slippage)
             </label>
@@ -102,13 +102,13 @@ import { SUPPORTED_TOKENS } from '../constants/tokens';
             [disabled]="isProcessing() || !selectedToken || !amount || amount <= 0"
             class="w-full py-3 rounded-lg font-semibold text-white transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             [ngClass]="{
-              'bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600': mode() === 'deposit',
-              'bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600': mode() === 'withdraw'
+              'bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600': mode === 'deposit',
+              'bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600': mode === 'withdraw'
             }"
           >
             {{ isProcessing()
               ? 'Processing...'
-              : mode() === 'deposit'
+              : mode === 'deposit'
               ? 'Deposit'
               : 'Withdraw' }}
           </button>
@@ -178,7 +178,7 @@ export class DepositWithdrawModalComponent {
 
       let txHash: string;
 
-      if (this.mode() === 'deposit') {
+      if (this.mode === 'deposit') {
         // Deposit to ETH
         txHash = await this.web3Service.depositToETH(
           this.getTokenAddress(),
@@ -193,7 +193,7 @@ export class DepositWithdrawModalComponent {
 
       this.txHash.set(txHash);
       this.successMessage.set(
-        `${this.mode() === 'deposit' ? 'Deposit' : 'Withdrawal'} successful!`
+        `${this.mode === 'deposit' ? 'Deposit' : 'Withdrawal'} successful!`
       );
       this.success.emit(txHash);
 
