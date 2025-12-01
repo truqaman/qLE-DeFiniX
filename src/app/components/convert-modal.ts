@@ -148,7 +148,7 @@ export class ConvertModalComponent {
   constructor(private web3Service: Web3Service) {}
 
   availableTokens() {
-    return SUPPORTED_TOKENS.filter(t => t.chain === this.chainId());
+    return SUPPORTED_TOKENS.filter(t => t.chain === this.chainId);
   }
 
   swapTokens(): void {
