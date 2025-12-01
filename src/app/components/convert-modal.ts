@@ -130,7 +130,7 @@ import { SUPPORTED_TOKENS } from '../constants/tokens';
   styles: []
 })
 export class ConvertModalComponent {
-  @Input() chainId = signal(10); // Default to Optimism
+  @Input() chainId = 10; // Default to Optimism
   @Output() close = new EventEmitter<void>();
   @Output() success = new EventEmitter<string>();
 
