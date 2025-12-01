@@ -40,13 +40,13 @@ export class Web3Service {
   currentChainId = signal<ChainId | null>(null);
   supportedChains = signal<ChainId[]>([10, 8453, 137, 1]); // OP, Base, Polygon, Ethereum
 
-  constructor() {
+  constructor(private configService: ConfigService) {
     this.initializeReadProvider();
     this.checkWalletConnection();
   }
 
   private initializeReadProvider() {
-    const alchemyKey = environment.apiKeys.alchemy;
+    const alchemyKey = this.configService.getAlchemyKey();
     if (alchemyKey) {
       const rpcUrl = `https://opt-mainnet.g.alchemy.com/v2/${alchemyKey}`;
       this.readProvider = new JsonRpcProvider(rpcUrl);
