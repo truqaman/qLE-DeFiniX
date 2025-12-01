@@ -14,7 +14,7 @@ import { SUPPORTED_TOKENS } from '../constants/tokens';
         <!-- Header -->
         <div class="p-6 border-b border-slate-700 flex items-center justify-between">
           <h2 class="text-2xl font-bold text-white">
-            {{ mode() === 'deposit' ? 'Deposit Tokens' : 'Withdraw Tokens' }}
+            {{ mode === 'deposit' ? 'Deposit Tokens' : 'Withdraw Tokens' }}
           </h2>
           <button
             (click)="closeModal()"
