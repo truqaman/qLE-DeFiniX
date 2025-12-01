@@ -1,8 +1,8 @@
 export const environment = {
   production: false,
   apiKeys: {
-    alchemy: process.env["ALCHEMY_API_KEY"] || "ovF7P49HQUPcSHcMQjg9-",
-    dune: process.env["DUNE_API_KEY"] || "sim_ENa3Ba3ZTFAuA9LWa0jtmJhd8fMgDaJY",
+    alchemy: "ovF7P49HQUPcSHcMQjg9-", // Replace with your Alchemy API key
+    dune: "sim_ENa3Ba3ZTFAuA9LWa0jtmJhd8fMgDaJY", // Replace with your Dune API key
   },
   smartContract: {
     address: "0x797ADa8Bca5B5Da273C0bbD677EBaC447884B23D",
