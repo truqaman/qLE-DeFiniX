@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, signal } from '@angular/core';
-import { CommonModule, DecimalPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Web3Service } from '../services/web3.service';
 import { SUPPORTED_TOKENS } from '../constants/tokens';
@@ -7,7 +7,7 @@ import { SUPPORTED_TOKENS } from '../constants/tokens';
 @Component({
   selector: 'app-deposit-withdraw-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule, DecimalPipe],
+  imports: [CommonModule, FormsModule],
   template: `
     <div class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4" (click)="closeModal()">
       <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 shadow-2xl max-w-md w-full" (click)="$event.stopPropagation()">
