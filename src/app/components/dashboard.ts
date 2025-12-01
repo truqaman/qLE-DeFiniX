@@ -170,26 +170,14 @@ import { ConvertModalComponent } from "./convert-modal";
               </h3>
               <div class="flex flex-col gap-3">
                 <button
-                  (click)="activeTab.set('deposit')"
-                  [ngClass]="{
-                    'bg-gradient-to-r from-cyan-500 to-blue-500':
-                      activeTab() === 'deposit',
-                    'bg-slate-700 hover:bg-slate-600':
-                      activeTab() !== 'deposit',
-                  }"
-                  class="w-full py-3 rounded-lg font-medium text-white transition-colors"
+                  (click)="showDepositModal.set(true)"
+                  class="w-full py-3 rounded-lg font-medium text-white transition-colors bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600"
                 >
                   Deposit
                 </button>
                 <button
-                  (click)="activeTab.set('withdraw')"
-                  [ngClass]="{
-                    'bg-gradient-to-r from-orange-500 to-red-500':
-                      activeTab() === 'withdraw',
-                    'bg-slate-700 hover:bg-slate-600':
-                      activeTab() !== 'withdraw',
-                  }"
-                  class="w-full py-3 rounded-lg font-medium text-white transition-colors"
+                  (click)="showWithdrawModal.set(true)"
+                  class="w-full py-3 rounded-lg font-medium text-white transition-colors bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600"
                 >
                   Withdraw
                 </button>
