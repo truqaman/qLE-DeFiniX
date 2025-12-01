@@ -405,7 +405,7 @@ export class Web3Service {
     }
 
     const chain = CHAIN_CONFIG[chainId];
-    const alchemyKey = environment.apiKeys.alchemy;
+    const alchemyKey = this.configService.getAlchemyKey();
     const rpcUrl = `${chain.rpcUrl}${alchemyKey}`;
 
     const chainParams = {
