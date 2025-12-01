@@ -354,7 +354,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
   }
 
-  private async loadBalances() {
+  async loadBalances() {
     const account = this.web3Service.connectedAccount();
     if (!account) return;
 
