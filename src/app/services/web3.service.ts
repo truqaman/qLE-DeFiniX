@@ -443,4 +443,45 @@ export class Web3Service {
   getUsdcAddress(chainId: ChainId): string {
     return USDC_ADDRESSES[chainId] || "";
   }
+
+  async approveToken(tokenAddress: string, spenderAddress: string, amount: bigint): Promise<string> {
+    if (!this.contract || !this.signer) throw new Error("Not connected");
+
+    try {
+      this.isLoading.set(true);
+      const ERC20_ABI = [
+        "function approve(address spender, uint256 amount) public returns (bool)"
+      ];
+
+      const tokenContract = new Contract(tokenAddress, ERC20_ABI, this.signer);
+      const tx = await (tokenContract as any)["approve"](spenderAddress, amount);
+      const receipt = await tx.wait();
+
+      return receipt?.hash || "";
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Approval failed";
+      this.errorMessage.set(message);
+      throw error;
+    } finally {
+      this.isLoading.set(false);
+    }
+  }
+
+  async checkAllowance(tokenAddress: string, ownerAddress: string, spenderAddress: string): Promise<bigint> {
+    if (!this.provider) throw new Error("Not connected");
+
+    try {
+      const ERC20_ABI = [
+        "function allowance(address owner, address spender) public view returns (uint256)"
+      ];
+
+      const readContract = new Contract(tokenAddress, ERC20_ABI, this.provider);
+      const allowance = await (readContract as any)["allowance"](ownerAddress, spenderAddress);
+
+      return allowance as bigint;
+    } catch (error) {
+      console.error("Error checking allowance:", error);
+      return BigInt(0);
+    }
+  }
 }
