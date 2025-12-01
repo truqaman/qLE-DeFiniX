@@ -6,6 +6,8 @@ import {
   USDC_DECIMALS,
   USDQ_DECIMALS,
 } from "../constants/contract";
+import { DepositWithdrawModalComponent } from "./deposit-withdraw-modal";
+import { ConvertModalComponent } from "./convert-modal";
 
 @Component({
   selector: "app-dashboard",
