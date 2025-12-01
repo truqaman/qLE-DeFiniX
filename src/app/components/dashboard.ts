@@ -193,14 +193,8 @@ import { ConvertModalComponent } from "./convert-modal";
               </h3>
               <div class="flex flex-col gap-3">
                 <button
-                  (click)="activeTab.set('convert')"
-                  [ngClass]="{
-                    'bg-gradient-to-r from-purple-500 to-pink-500':
-                      activeTab() === 'convert',
-                    'bg-slate-700 hover:bg-slate-600':
-                      activeTab() !== 'convert',
-                  }"
-                  class="w-full py-3 rounded-lg font-medium text-white transition-colors"
+                  (click)="showConvertModal.set(true)"
+                  class="w-full py-3 rounded-lg font-medium text-white transition-colors bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
                 >
                   Exchange Assets
                 </button>
