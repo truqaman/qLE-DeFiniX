@@ -279,6 +279,32 @@ import { ConvertModalComponent } from "./convert-modal";
             </button>
           </div>
         }
+
+        <!-- Deposit Modal -->
+        @if (showDepositModal()) {
+          <app-deposit-withdraw-modal
+            [mode]="'deposit'"
+            (close)="showDepositModal.set(false)"
+            (success)="loadBalances()"
+          ></app-deposit-withdraw-modal>
+        }
+
+        <!-- Withdraw Modal -->
+        @if (showWithdrawModal()) {
+          <app-deposit-withdraw-modal
+            [mode]="'withdraw'"
+            (close)="showWithdrawModal.set(false)"
+            (success)="loadBalances()"
+          ></app-deposit-withdraw-modal>
+        }
+
+        <!-- Convert Modal -->
+        @if (showConvertModal()) {
+          <app-convert-modal
+            (close)="showConvertModal.set(false)"
+            (success)="loadBalances()"
+          ></app-convert-modal>
+        }
       </div>
     </div>
   `,
