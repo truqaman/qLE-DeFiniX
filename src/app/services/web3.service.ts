@@ -10,7 +10,7 @@ import {
   ChainId,
   SUPPORTED_TOKENS,
 } from "../constants/tokens";
-import { environment } from "../../environments/environment";
+import { ConfigService } from "./config.service";
 
 declare global {
   interface Window {
