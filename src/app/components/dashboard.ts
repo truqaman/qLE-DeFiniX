@@ -303,7 +303,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ethBalance = signal(BigInt(0));
   walletExists = signal(false);
   totalWallets = signal(0n);
-  activeTab = signal<"deposit" | "withdraw" | "convert">("deposit");
   showDepositModal = signal(false);
   showWithdrawModal = signal(false);
   showConvertModal = signal(false);
